@@ -1,0 +1,91 @@
+.login-container {
+  display: flex;
+  height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* LEFT */
+.login-left {
+  flex: 1;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-left img {
+  width: 70%;
+}
+
+/* RIGHT */
+.login-right {
+  flex: 1;
+  background: #0a74da;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-card {
+  background: white;
+  padding: 40px;
+  width: 350px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.login-card h2 {
+  margin-bottom: 5px;
+}
+
+.login-card p {
+  color: gray;
+  margin-bottom: 25px;
+}
+
+/* INPUTS */
+.input-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 30px;
+  padding: 12px 16px;
+  margin-bottom: 15px;
+}
+
+.input-box span {
+  margin-right: 10px;
+}
+
+.input-box input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+}
+
+/* BUTTON */
+.login-card button {
+  width: 100%;
+  background: #0a74da;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 30px;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.login-card button:hover {
+  background: #085cb5;
+}
+
+.forgot {
+  display: block;
+  margin-top: 15px;
+  font-size: 13px;
+  color: gray;
+  text-decoration: none;
+}

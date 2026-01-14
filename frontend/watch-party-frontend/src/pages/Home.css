@@ -1,0 +1,94 @@
+.home-container {
+  display: flex;
+  height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* LEFT */
+.home-left {
+  flex: 1;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-left img {
+  width: 70%;
+}
+
+/* RIGHT */
+.home-right {
+  flex: 1;
+  background: #0a74da;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-card {
+  background: white;
+  width: 360px;
+  padding: 40px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.home-card h2 {
+  margin-bottom: 8px;
+}
+
+.home-card p {
+  color: gray;
+  margin-bottom: 25px;
+}
+
+/* BUTTONS */
+.primary-btn,
+.secondary-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 30px;
+  font-size: 15px;
+  cursor: pointer;
+  border: none;
+}
+
+.primary-btn {
+  background: #0a74da;
+  color: white;
+}
+
+.primary-btn:hover {
+  background: #085cb5;
+}
+
+.secondary-btn {
+  background: #ffffff;
+  color: #0a74da;
+  border: 1px solid #0a74da;
+  margin-top: 12px;
+}
+
+.secondary-btn:hover {
+  background: #f0f7ff;
+}
+
+/* INPUT */
+.home-card input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 30px;
+  border: 1px solid #ddd;
+  outline: none;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* DIVIDER */
+.divider {
+  margin: 20px 0;
+  color: gray;
+  font-size: 13px;
+}

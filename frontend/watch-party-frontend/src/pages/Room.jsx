@@ -4,6 +4,19 @@ import YouTube from "react-youtube";
 import { connectSocket, sendWatchEvent, sendChat } from "../websocket/socket";
 import "./Room.css";
 
+const extractVideoId = (urlOrId) => {
+  if (!urlOrId) return "";
+  const trimmed = typeof urlOrId === 'string' ? urlOrId.trim() : String(urlOrId).trim();
+  
+  if (trimmed.length === 11 && !trimmed.includes('/') && !trimmed.includes('.')) {
+    return trimmed;
+  }
+
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+  const match = trimmed.match(regExp);
+  return (match && match[2].length === 11) ? match[2] : trimmed;
+};
+
 const Room = () => {
   const { roomCode } = useParams();
   const playerRef = useRef(null);
@@ -30,8 +43,13 @@ const Room = () => {
   useEffect(() => {
     connectSocket(localStorage.getItem("token"), roomCode, {
       onWatch: (event) => {
+        console.log("RECEIVED WATCH EVENT:", event);
+
         if (event.action === "LOAD") {
-          setVideoId(event.videoId);
+          const rawId = event.videoId || event.payload?.videoId;
+          const cleanId = extractVideoId(rawId);
+          console.log("EXTRACTED VIDEO ID:", cleanId);
+          setVideoId(cleanId);
           return;
         }
         if (!playerRef.current) return;
@@ -55,8 +73,10 @@ const Room = () => {
   /* ---------------- CONTROLS ---------------- */
   const loadVideo = () => {
     if (!videoInput.trim()) return;
-    setVideoId(videoInput.trim());
-    sendWatchEvent(roomCode, { action: "LOAD", videoId: videoInput.trim() });
+    const cleanId = extractVideoId(videoInput);
+    console.log("Loading Local Video ID:", cleanId);
+    setVideoId(cleanId);
+    sendWatchEvent(roomCode, { action: "LOAD", videoId: cleanId });
   };
 
   const play = () => {
@@ -91,7 +111,7 @@ const Room = () => {
           {isHost && (
             <div className="video-load">
               <input
-                placeholder="Enter YouTube Video ID"
+                placeholder="Paste YouTube Link or Video ID"
                 value={videoInput}
                 onChange={(e) => setVideoInput(e.target.value)}
               />
@@ -99,23 +119,30 @@ const Room = () => {
             </div>
           )}
 
-          {videoId ? (
+          <div style={{ display: videoId ? "block" : "none" }}>
             <YouTube
-              videoId={videoId}
+              videoId={videoId || "jNQXAC9IVRw"}
               opts={{
                 width: "100%",
                 height: "420",
                 playerVars: {
                   controls: isHost ? 1 : 0,
                   disablekb: 1,
+                  autoplay: 0,
                 },
               }}
               onReady={(e) => {
+                console.log("YouTube Player Ready");
                 playerRef.current = e.target;
                 setPlayerReady(true);
               }}
+              onError={(e) => {
+                console.error("YouTube Player Error:", e);
+              }}
             />
-          ) : (
+          </div>
+
+          {!videoId && (
             <div className="waiting">Waiting for host to load video…</div>
           )}
 

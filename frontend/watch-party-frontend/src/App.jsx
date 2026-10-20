@@ -1,8 +1,6 @@
-
-
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./auth/Login";
-import Register from "./auth/Register";
+import Signup from "./pages/Signup"; // Import your newly created Signup page
 import ProtectedRoute from "./auth/ProtectedRoute";
 import Home from "./pages/Home";
 import Room from "./pages/Room";
@@ -14,7 +12,7 @@ function App() {
         <Route path="/" element={<Navigate to="/login" />} />
 
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={<Signup />} /> {/* Connected Signup here */}
 
         <Route
           path="/home"
